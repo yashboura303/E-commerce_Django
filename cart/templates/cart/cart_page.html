@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Cart
+{% endblock title %}
+
+{% block content %}
+    
+<div class="album py-5 mt-5 bg-light">
+  <h2 class="text-left pl-3 text-secondary">
+    Your Cart
+  </h2>
+  <hr>
+    <div class="container ">
+    {% if cart.products.exists %}
+      <div class="row">
+      	{% for product in cart.products.all %}
+        <div class="col-sm-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{product.image.url}}" height="200" width="40" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.title}}</h5>
+                        <h6 class="badge badge-info p-2 float-md-left mt-1">
+
+                          <i class="icon ion-md-pricetag pr-1"></i>Price-{{product.price}}</h6>
+                          <a href="{% url 'delete_cart'  product_id=product.id %}">
+                            <button type="button" class="float-md-right btn btn-danger"><i class="icon ion-md-trash pr-1"></i>Remove</button>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+      </div>
+    </div>
+        <div class = "container text-center">
+          <h2 class="text-center">Total Price - &#8377;{{total_price}}</h2>
+          <hr>
+            <a class="btn btn-primary" href="{% url 'orderpage'%}">BUY</a>
+            </div>
+    {% else %}
+
+        <h2 class="text-center m-5">NO ITEMS IN YOUR CART</h2>
+        {% endif %}
+  </div>
+    
+
+{% endblock %}

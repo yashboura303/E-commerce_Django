@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Welcome
+{% endblock title %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid mt-5">
+    <div class="container">
+      <h2 class="display-5">Search Range of Products</h2>
+      <form class="form-inline my-2 my-lg-0" action="{% url 'search'%}" method="GET">
+          <div class="form-group">
+              <label class="pr-1" for="exampleFormControlSelect2">Category:</label>
+              <select  name="Productcategory" class="form-control mr-2" id="exampleFormControlSelect2">
+                <option selected="true" value="">Select</option>
+                <option value="Sports">Sports</option>
+                <option value="Cloths">Cloths</option>
+                <option value="Electronics">Electronics</option>
+              </select>
+            </div>
+        <input class="form-control mr-sm-2" type="search" name="searchInput" placeholder="Search" aria-label="Search" value="{{values.searchInput}}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      
+      </form>
+    </div>
+  </div>
+
+<div class="album py-5  bg-light">
+  {% include './message.html'%}
+    <div class="container">
+        <div class="row">
+            {% for product in products.all %}
+            <div class="col-sm-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{product.image.url}}" height="200" width="40" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.title}}</h5>
+                        <p class="card-text"> {{ product.description}}</p>
+                        <h6 class="badge badge-info p-2 float-md-left mt-1">
+
+                          <i class="icon ion-md-pricetag pr-1"></i>Price-{{product.price}}</h6>
+                        <a href="{% url 'add_cart'  product_id=product.id %}">
+                            <button type="button" class="float-md-right btn btn-success"><i class="icon ion-md-cart pr-1"></i>Add To Cart</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+{% endblock %}

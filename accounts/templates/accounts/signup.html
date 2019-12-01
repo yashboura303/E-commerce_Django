@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Up
+{% endblock title %}
+{% block content %}
+
+{% load staticfiles%}
+
+<style type="text/css">
+  .background-div{
+    background: url('{% static 'background.png' %}'),linear-gradient(rgba(0, 0, 0, 0.486),rgba(0, 0, 0, 0.649));;
+    background-position: center;
+    background-size: cover;
+        background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    height: 90vh;
+
+  }
+</style>
+
+<div class="background-div text-white pb-5">
+
+<h1 class="text-center pt-3">Sign Up</h1>
+
+{% include './message.html' %}
+
+<form method="POST" action="{% url 'signup' %}" class="w-50 mx-auto pb-5">
+	{% csrf_token %}
+	<div class="form-group">
+  	<label for="emailem">Email</label>
+  	<input class="form-control" type="text" name="email">
+  </div>
+    <div class="form-group">
+  	<label for="username">User Name</label>
+  	<input class="form-control" type="text" name="username">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input class="form-control" id="password" type="password" name = "password1" ></input>
+  </div>
+   <div class="form-group">
+    <label for="password">Confirm Password</label>
+    <input class="form-control" id="password" type="password" name = "password2" ></input>
+  </div>
+  <input class="btn btn-primary" type="submit" value="Sign Up" />
+</form>
+</div>
+
+{% endblock %}
